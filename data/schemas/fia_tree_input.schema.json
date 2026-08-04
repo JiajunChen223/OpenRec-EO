@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-tree-input-projection",
+  "title": "USDA FIA TREE input projection used by canonical preprocessing (schema only)",
+  "description": "The canonical script reads only this six-column projection from state TREE tables. The raw tables are external and are not included in the public candidate.",
+  "type": "object",
+  "additionalProperties": true,
+  "x-openrec-eo": {
+    "release_tier": "FORBIDDEN_PUBLIC_PLOT_OR_GEOSPATIAL",
+    "public_fixture_allowed": "SYNTHETIC_ONLY",
+    "required_projection_only": true,
+    "source_evidence": {
+      "script": "09_rse_strengthening/independent_structure_evidence_v1/extract_fia_continuous_structure.py",
+      "script_sha256": "b56c31c28484466b03ea2a9ebc5fc5b8abc7e5c07b7c50cd07d29741d673539a",
+      "tree_usecols": ["PLT_CN", "STATUSCD", "DIA", "TPA_UNADJ", "DRYBIO_AG", "HT"]
+    },
+    "public_action": "Never ship source-derived TREE rows. A synthetic fixture, if later added, must be labelled SYNTHETIC_NON_SCIENTIFIC_FIXTURE.",
+    "rights_status": "USDA_FIA_TERMS_UNRESOLVED"
+  },
+  "properties": {
+    "PLT_CN": {
+      "type": ["string", "null"],
+      "description": "FIA plot/measurement control number used to join selected measurements.",
+      "x-data-classification": "PLOT_MEASUREMENT_IDENTIFIER",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "STATUSCD": {
+      "type": ["integer", "null"],
+      "description": "Tree status code; the frozen protocol retains live trees (STATUSCD == 1).",
+      "x-data-classification": "TREE_LEVEL_SOURCE_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "DIA": {
+      "type": ["number", "null"],
+      "description": "Tree diameter in inches; the frozen threshold is DIA >= 5.0.",
+      "x-data-classification": "TREE_LEVEL_SOURCE_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "TPA_UNADJ": {
+      "type": ["number", "null"],
+      "description": "Unadjusted trees-per-acre expansion value.",
+      "x-data-classification": "TREE_LEVEL_SOURCE_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "DRYBIO_AG": {
+      "type": ["number", "null"],
+      "description": "Above-ground dry biomass source field; may be missing.",
+      "x-data-classification": "TREE_LEVEL_SOURCE_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "HT": {
+      "type": ["number", "null"],
+      "description": "Tree height source field; may be missing.",
+      "x-data-classification": "TREE_LEVEL_SOURCE_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    }
+  },
+  "required": ["PLT_CN", "STATUSCD", "DIA", "TPA_UNADJ", "DRYBIO_AG", "HT"]
+}

@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "DRAFT TEMPLATE - MIT selected; cite only after the public release tag, repository URL, and DOI are approved."
+title: "OpenRec-EO: Reproducible Event-Level Post-Fire Forest Monitoring"
+type: software
+version: "TO_BE_CONFIRMED"
+date-released: "TO_BE_CONFIRMED"
+authors:
+  - family-names: "Chen"
+    given-names: "Jiajun"
+    affiliation: "College of Earth Sciences, Jilin University"
+license: "MIT"
+keywords:
+  - remote sensing
+  - post-fire forest monitoring
+  - reproducible research
+abstract: "TO_BE_CONFIRMED"
+
+# Add repository-code, ORCID, date-released, and DOI only after they are
+# assigned and verified. This placeholder is intentionally not a citable CFF.

@@ -1,0 +1,17 @@
+name: openrec-eo-gee-optional-to-be-confirmed
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pandas
+  - scipy
+  - statsmodels
+  - pytest
+  - pip
+  - pip:
+      - earthengine-api==1.7.32
+
+# Optional, non-default profile.  Do not install or execute it until the
+# copyright-holder, project-owner, and provider data-rights decisions are
+# closed.  The offline core remains environment.yml.

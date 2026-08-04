@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-selection-input",
+  "title": "FIA strict repeated-plot candidate selection input (schema only)",
+  "description": "Required columns for the frozen pre/post measurement selection carrier. This describes a restricted input shape and contains no data rows.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-openrec-eo": {
+    "release_tier": "RESTRICTED_INTERNAL_INPUT",
+    "public_fixture_allowed": false,
+    "contains_plot_linkage_fields": true,
+    "source_evidence": {
+      "file": "09_rse_strengthening/independent_structure_evidence_v1/fia_strict_repeated_plot_candidates.csv",
+      "sha256": "b60437aa91c5cea95c5020b2fd20a3c2e80fa5049bb4873483c7f1c842b46c8d",
+      "observed_rows": 280,
+      "observed_columns": 8
+    },
+    "public_action": "Do not distribute this carrier. Publish only de-identified event-level summaries if approved.",
+    "rights_status": "UNRESOLVED_EXTERNAL_DATA_AND_PRIVACY"
+  },
+  "properties": {
+    "Event_ID": {
+      "type": "string",
+      "description": "Internal event join key.",
+      "x-data-classification": "INTERNAL_LINKAGE_IDENTIFIER",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "stable_plot_key": {
+      "type": "string",
+      "description": "Stable repeated-plot key.",
+      "x-data-classification": "PLOT_LINKAGE_IDENTIFIER",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "fire_year": {
+      "type": "integer",
+      "description": "Event fire year.",
+      "x-data-classification": "EVENT_LEVEL_TEMPORAL_FIELD",
+      "x-public-action": "CONDITIONAL_AGGREGATE_ONLY"
+    },
+    "prefire_year": {
+      "type": "integer",
+      "description": "Latest eligible measurement year strictly before fire year.",
+      "x-data-classification": "PLOT_LEVEL_TEMPORAL_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "postfire_year": {
+      "type": "integer",
+      "description": "Earliest eligible measurement year strictly after fire year.",
+      "x-data-classification": "PLOT_LEVEL_TEMPORAL_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "prefire_lag_years": {
+      "type": "integer",
+      "description": "Prefire measurement lag used by the selection contract.",
+      "x-data-classification": "PLOT_LEVEL_SELECTION_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "postfire_lag_years": {
+      "type": "integer",
+      "description": "Postfire measurement lag used by the selection contract.",
+      "x-data-classification": "PLOT_LEVEL_SELECTION_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "measurement_years": {
+      "type": "string",
+      "description": "Serialized available measurement-year list; retained only for internal selection auditing.",
+      "x-data-classification": "PLOT_LEVEL_SELECTION_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    }
+  },
+  "required": [
+    "Event_ID",
+    "stable_plot_key",
+    "fire_year",
+    "prefire_year",
+    "postfire_year",
+    "prefire_lag_years",
+    "postfire_lag_years",
+    "measurement_years"
+  ]
+}

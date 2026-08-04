@@ -1,0 +1,15 @@
+name: openrec-eo-offline-core-to-be-confirmed
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pandas
+  - scipy
+  - statsmodels
+  - pytest
+
+# Offline core profile: deliberately excludes earthengine-api.  The optional
+# GEE profile is environment-gee.yml and must not be used until owner/provider
+# rights are approved. Pin exact core versions after clean-environment
+# reproduction.

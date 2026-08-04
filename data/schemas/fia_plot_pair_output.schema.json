@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-plot-pair-output",
+  "title": "FIA plot-pair structure-change output (schema only; forbidden public carrier)",
+  "description": "Schema inventory for the internal plot-pair output. The schema is retained to make accidental publication detectable; no rows are included.",
+  "type": "object",
+  "additionalProperties": true,
+  "x-openrec-eo": {
+    "release_tier": "FORBIDDEN_PUBLIC_PLOT_OR_GEOSPATIAL",
+    "public_fixture_allowed": false,
+    "source_evidence": {
+      "file": "09_rse_strengthening/independent_structure_evidence_v1/fia_plot_pair_structure_change.csv",
+      "sha256": "392f36a5b5debddb73b45a80c3cafaa71a70399ae5551df55686d2d51dd64b02",
+      "observed_rows": 280,
+      "observed_columns": 33
+    },
+    "public_action": "Do not publish or place in a public release archive. Aggregate internally to event level, then apply the conditional aggregate review.",
+    "forbidden_field_families": ["Event_ID", "stable_plot_key", "state", "plot-level years", "pre/post values", "delta/ratio/log_ratio by plot"],
+    "rights_status": "UNRESOLVED_EXTERNAL_DATA_AND_PRIVACY"
+  },
+  "properties": {
+    "Event_ID": {"type": "string", "x-public-action": "FORBID_RAW_RELEASE"},
+    "stable_plot_key": {"type": "string", "x-public-action": "FORBID_PUBLIC_RELEASE"},
+    "state": {"type": "string", "x-public-action": "FORBID_RAW_RELEASE"},
+    "fire_year": {"type": "integer", "x-public-action": "FORBID_RAW_RELEASE"},
+    "prefire_year": {"type": "integer", "x-public-action": "FORBID_RAW_RELEASE"},
+    "postfire_year": {"type": "integer", "x-public-action": "FORBID_RAW_RELEASE"},
+    "prefire_tree_records": {"type": ["integer", "number", "null"], "x-public-action": "FORBID_PUBLIC_RELEASE"},
+    "postfire_tree_records": {"type": ["integer", "number", "null"], "x-public-action": "FORBID_PUBLIC_RELEASE"}
+  },
+  "patternProperties": {
+    "^(pre|post|delta|ratio|log_ratio)_": {"x-public-action": "FORBID_PUBLIC_RELEASE"}
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-eo-state-input-minimal",
+  "title": "Minimal EO event table contract for FIA association (schema only)",
+  "description": "Minimal columns consumed by the canonical FIA–EO association implementation after the internal Event_ID join. The full event_eo_state.csv carrier is not included.",
+  "type": "object",
+  "additionalProperties": true,
+  "x-openrec-eo": {
+    "release_tier": "CONDITIONAL_EVENT_AGGREGATE",
+    "public_fixture_allowed": "SYNTHETIC_ONLY",
+    "source_evidence": {
+      "file": "08_paper_results_package/00_CURRENT_USE_FOR_PAPER/RSE320_openrec_paper_storyline_clean_current/01_design_and_protocol/event_eo_state.csv",
+      "sha256": "c292c57708c7e326b101bea1cf267b090c4a8d8ece8ac04fc3de675be9293cda",
+      "observed_rows": 320,
+      "observed_columns": 38,
+      "join_key": "Event_ID"
+    },
+    "public_action": "Use a release-scoped pseudonymous event key and only the minimal outcome fields in an approved aggregate workflow.",
+    "rights_status": "UPSTREAM_EO_RIGHTS_UNRESOLVED"
+  },
+  "properties": {
+    "Event_ID": {
+      "type": "string",
+      "description": "Internal join key; never expose in a public FIA-linked table.",
+      "x-data-classification": "INTERNAL_LINKAGE_IDENTIFIER",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "structural_recovery_index": {
+      "type": ["number", "null"],
+      "description": "EO structural recovery outcome consumed by the association analysis.",
+      "x-data-classification": "EVENT_AGGREGATE_OUTCOME",
+      "x-public-action": "CONDITIONAL_AGGREGATE_ONLY"
+    },
+    "sf_recovery_gap": {
+      "type": ["number", "null"],
+      "description": "EO functional/structural recovery gap outcome consumed by the association analysis.",
+      "x-data-classification": "EVENT_AGGREGATE_OUTCOME",
+      "x-public-action": "CONDITIONAL_AGGREGATE_ONLY"
+    },
+    "comparison_group": {
+      "type": ["string", "null"],
+      "description": "Optional event-level analysis grouping; release only after disclosure review.",
+      "x-data-classification": "EVENT_AGGREGATE_LABEL",
+      "x-public-action": "CONDITIONAL_AGGREGATE_ONLY"
+    }
+  },
+  "required": ["Event_ID", "structural_recovery_index", "sf_recovery_gap"]
+}

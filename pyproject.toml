@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openrec-eo"
+version = "0.0.0.dev0"
+description = "Reproducible event-level post-fire forest monitoring analysis for the OpenRec-EO RSE manuscript (staging candidate)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Jiajun Chen" }]
+dependencies = [
+  "numpy",
+  "pandas",
+  "scipy",
+  "statsmodels",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+# Earth Engine is deliberately isolated from the offline core.  This extra
+# only documents the optional acquisition profile; owner/provider rights must
+# be closed before it is used or published as an executable route.
+gee = ["earthengine-api==1.7.32"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# The offline core intentionally has no Earth Engine dependency.  The exact
+# sibling acquisition script is staged for the frozen analyzer hash contract
+# and is documented in docs/gee_optional_profile.md.  Exact core versions,
+# supported Python versions, copyright holder, and final release metadata must
+# be confirmed before public publication.

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-eo-association-output",
+  "title": "FIA–EO event-level association summary (conditional public schema)",
+  "description": "Aggregate association result shape with no plot identifiers, event identifiers, coordinates, or raw source rows.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-openrec-eo": {
+    "release_tier": "CONDITIONAL_AGGREGATE",
+    "public_fixture_allowed": "SYNTHETIC_ONLY",
+    "upstream_rights_required": true,
+    "source_evidence": {
+      "file": "09_rse_strengthening/independent_structure_evidence_v1/fia_eo_continuous_association_results.csv",
+      "sha256": "17fd39033b602463ce79d1a9ff20e279aaca0c2a1ccce4f4b9c435c36504d619",
+      "observed_rows": 20,
+      "observed_columns": 12
+    },
+    "public_action": "Potentially releasable only after the rights/privacy gate; no row-level join key may be added.",
+    "rights_status": "UNRESOLVED_EXTERNAL_DATA_AND_PRIVACY"
+  },
+  "properties": {
+    "analysis": {"type": "string", "description": "Named analysis stratum.", "x-data-classification": "AGGREGATE_LABEL"},
+    "fia_metric": {"type": "string", "description": "FIA structural metric label.", "x-data-classification": "AGGREGATE_LABEL"},
+    "eo_outcome": {"type": "string", "description": "EO outcome label.", "x-data-classification": "AGGREGATE_LABEL"},
+    "expected_direction": {"type": "string", "enum": ["positive", "negative"], "x-data-classification": "AGGREGATE_LABEL"},
+    "n_events": {"type": "integer", "minimum": 1, "x-data-classification": "AGGREGATE_COUNT"},
+    "spearman_rho": {"type": ["number", "null"], "minimum": -1, "maximum": 1, "x-data-classification": "AGGREGATE_STATISTIC"},
+    "ci95_low": {"type": ["number", "null"], "minimum": -1, "maximum": 1, "x-data-classification": "AGGREGATE_STATISTIC"},
+    "ci95_high": {"type": ["number", "null"], "minimum": -1, "maximum": 1, "x-data-classification": "AGGREGATE_STATISTIC"},
+    "p_two_sided": {"type": ["number", "null"], "minimum": 0, "maximum": 1, "x-data-classification": "AGGREGATE_STATISTIC"},
+    "timing_adjusted_partial_rank_r": {"type": ["number", "null"], "minimum": -1, "maximum": 1, "x-data-classification": "AGGREGATE_STATISTIC"},
+    "q_bh_10_tests": {"type": ["number", "null"], "minimum": 0, "maximum": 1, "x-data-classification": "AGGREGATE_STATISTIC"},
+    "direction_supported": {"type": ["boolean", "null"], "x-data-classification": "AGGREGATE_DECISION_FLAG"}
+  },
+  "required": [
+    "analysis",
+    "fia_metric",
+    "eo_outcome",
+    "expected_direction",
+    "n_events",
+    "spearman_rho",
+    "ci95_low",
+    "ci95_high",
+    "p_two_sided",
+    "timing_adjusted_partial_rank_r",
+    "q_bh_10_tests",
+    "direction_supported"
+  ]
+}

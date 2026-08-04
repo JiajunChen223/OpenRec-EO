@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-event-aggregate-output",
+  "title": "De-identified FIA event-level aggregate (conditional public schema)",
+  "description": "A release-scoped event-level summary shape. It contains no plot key, measurement control number, coordinate, geometry, or tree row. This schema is not permission to redistribute source-derived values.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-openrec-eo": {
+    "release_tier": "CONDITIONAL_EVENT_AGGREGATE",
+    "public_fixture_allowed": "SYNTHETIC_ONLY",
+    "minimum_group_size_recommendation": 5,
+    "release_event_id": "fresh_random_or_non-reversible_identifier_per_release",
+    "exact_fire_year": "replace with fire_year_bin unless rights/privacy review explicitly permits exact year",
+    "coordinates_and_geometry": "never included",
+    "upstream_rights_required": true,
+    "rights_status": "UNRESOLVED_EXTERNAL_DATA_AND_PRIVACY",
+    "public_action": "Hold until USDA FIA terms, external-product terms, author/institution licence, and disclosure review are closed."
+  },
+  "properties": {
+    "release_event_id": {
+      "type": "string",
+      "pattern": "^evt_[a-z0-9]{16}$",
+      "description": "Release-scoped identifier not derivable from Event_ID, plot keys, names, or coordinates.",
+      "x-data-classification": "DE_IDENTIFIED_EVENT_KEY"
+    },
+    "fire_cohort": {
+      "type": ["string", "null"],
+      "description": "Coarse fire cohort label.",
+      "x-data-classification": "COARSE_EVENT_FIELD"
+    },
+    "fire_year_bin": {
+      "type": ["string", "null"],
+      "description": "Coarsened fire-year bin; exact year is not required for the aggregate contract.",
+      "x-data-classification": "COARSE_EVENT_TEMPORAL_FIELD"
+    },
+    "coarse_region": {
+      "type": ["string", "null"],
+      "description": "Coarse region only; no state, coordinates, polygon, or event name.",
+      "x-data-classification": "COARSE_GEOGRAPHIC_FIELD"
+    },
+    "n_fia_plot_pairs": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of eligible plot pairs contributing to this event-level median.",
+      "x-data-classification": "EVENT_AGGREGATE_COUNT"
+    },
+    "postfire_measurement_age_bin": {
+      "type": ["string", "null"],
+      "description": "Coarsened postfire measurement-age bin.",
+      "x-data-classification": "COARSE_EVENT_TEMPORAL_FIELD"
+    },
+    "median_log_ratio_basal_area_ft2_ac": {
+      "type": ["number", "null"],
+      "description": "Event median of plot-pair log response ratios for basal area (ft² ac⁻¹).",
+      "x-data-classification": "EVENT_AGGREGATE_METRIC"
+    },
+    "median_log_ratio_biomass_lb_ac": {
+      "type": ["number", "null"],
+      "description": "Event median of plot-pair log response ratios for biomass (lb ac⁻¹).",
+      "x-data-classification": "EVENT_AGGREGATE_METRIC"
+    },
+    "median_log_ratio_tree_density_ac": {
+      "type": ["number", "null"],
+      "description": "Event median of plot-pair log response ratios for tree density (ac⁻¹).",
+      "x-data-classification": "EVENT_AGGREGATE_METRIC"
+    },
+    "median_log_ratio_qmd_in": {
+      "type": ["number", "null"],
+      "description": "Event median of plot-pair log response ratios for quadratic mean diameter (in).",
+      "x-data-classification": "EVENT_AGGREGATE_METRIC"
+    },
+    "median_log_ratio_ba_weighted_height_ft": {
+      "type": ["number", "null"],
+      "description": "Event median of plot-pair log response ratios for basal-area-weighted height (ft).",
+      "x-data-classification": "EVENT_AGGREGATE_METRIC"
+    }
+  },
+  "required": [
+    "release_event_id",
+    "fire_cohort",
+    "fire_year_bin",
+    "coarse_region",
+    "n_fia_plot_pairs",
+    "postfire_measurement_age_bin",
+    "median_log_ratio_basal_area_ft2_ac",
+    "median_log_ratio_biomass_lb_ac",
+    "median_log_ratio_tree_density_ac",
+    "median_log_ratio_qmd_in",
+    "median_log_ratio_ba_weighted_height_ft"
+  ]
+}

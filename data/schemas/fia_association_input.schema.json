@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:openrec-eo:rse:v1:schema:fia-association-input",
+  "title": "FIA strict measurement-event association input (schema only)",
+  "description": "Required columns for the frozen FIA event/plot association carrier. This describes a restricted input shape and contains no data rows.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-openrec-eo": {
+    "release_tier": "RESTRICTED_INTERNAL_INPUT",
+    "public_fixture_allowed": false,
+    "contains_plot_or_geospatial_fields": true,
+    "source_evidence": {
+      "file": "09_rse_strengthening/independent_structure_evidence_v1/fia_strict_measurement_event_associations.csv",
+      "sha256": "fe103c8f527fc59de7d0b44c7f252f6d927ed47fef55518cd32f343d82bdc767",
+      "observed_rows": 1737,
+      "observed_columns": 10
+    },
+    "public_action": "Do not distribute this carrier. Use only a reviewed, de-identified event-level aggregate.",
+    "rights_status": "UNRESOLVED_EXTERNAL_DATA_AND_PRIVACY"
+  },
+  "properties": {
+    "Event_ID": {
+      "type": "string",
+      "description": "Internal event join key; replace with a release-scoped non-reversible event identifier after aggregation.",
+      "x-data-classification": "INTERNAL_LINKAGE_IDENTIFIER",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "fire_year": {
+      "type": "integer",
+      "description": "Event fire year.",
+      "x-data-classification": "EVENT_LEVEL_TEMPORAL_FIELD",
+      "x-public-action": "CONDITIONAL_AGGREGATE_ONLY"
+    },
+    "state": {
+      "type": "string",
+      "description": "Two-letter state code associated with the internal event/plot carrier.",
+      "x-data-classification": "COARSE_GEOGRAPHIC_FIELD",
+      "x-public-action": "OMIT_OR_COARSEN_AFTER_RIGHTS_REVIEW"
+    },
+    "stable_plot_key": {
+      "type": "string",
+      "description": "Stable project plot key used to link repeated measurements.",
+      "x-data-classification": "PLOT_LINKAGE_IDENTIFIER",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "plot_measurement_cn": {
+      "type": "string",
+      "description": "FIA plot-measurement control number.",
+      "x-data-classification": "PLOT_MEASUREMENT_IDENTIFIER",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "measure_year": {
+      "type": "integer",
+      "description": "FIA measurement year for the association row.",
+      "x-data-classification": "PLOT_LEVEL_TEMPORAL_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "public_forest_prop": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Public-forest proportion used by the frozen selection rule.",
+      "x-data-classification": "PLOT_LEVEL_SELECTION_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "private_forest_prop": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Private-forest proportion retained in the internal selection audit.",
+      "x-data-classification": "PLOT_LEVEL_SELECTION_FIELD",
+      "x-public-action": "FORBID_RAW_RELEASE"
+    },
+    "public_lat": {
+      "type": ["number", "null"],
+      "minimum": -90,
+      "maximum": 90,
+      "description": "Fuzzed public FIA latitude; still a geospatial carrier.",
+      "x-data-classification": "SENSITIVE_GEOSPATIAL_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    },
+    "public_lon": {
+      "type": ["number", "null"],
+      "minimum": -180,
+      "maximum": 180,
+      "description": "Fuzzed public FIA longitude; still a geospatial carrier.",
+      "x-data-classification": "SENSITIVE_GEOSPATIAL_FIELD",
+      "x-public-action": "FORBID_PUBLIC_RELEASE"
+    }
+  },
+  "required": [
+    "Event_ID",
+    "fire_year",
+    "state",
+    "stable_plot_key",
+    "plot_measurement_cn",
+    "measure_year",
+    "public_forest_prop",
+    "private_forest_prop",
+    "public_lat",
+    "public_lon"
+  ]
+}
